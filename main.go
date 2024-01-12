@@ -12,9 +12,8 @@ func main() {
 	var remainingTickets uint = 50
 	var bookings []string
 
-	fmt.Printf("Welcome to our %v booking application\n", conferenceName) // %v to print any variable
-	fmt.Printf("We have total of %v tickets and %v are remaining\n", conferenceTickets, remainingTickets)
-	fmt.Println("Get your tickets here to attend")
+	// greeting user function
+	greetingUsers(conferenceName, conferenceTickets, remainingTickets)
 
 	for {
 		// getting user input
@@ -43,12 +42,8 @@ func main() {
 			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 			fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
-			firstNames := []string{} // create an empty slice
-			for _, booking := range bookings {
-				var names = strings.Fields(booking) // Fields returns slices elements when whitespace found. names is a slice here
-				firstNames = append(firstNames, names[0])
-			}
-			fmt.Printf("The first names of bookings are: %v\n", firstNames)
+			// print first names
+			printFirstNames(bookings)
 
 			// noTicketsRemaining := remainingTickets == 0 // can be written like this
 			if remainingTickets == 0 {
@@ -66,17 +61,20 @@ func main() {
 				fmt.Println("number of tickets you entered is invalid")
 			}
 		}
-
-		// switch
-		city := "dhaka"
-
-		switch city {
-		case "chittagong":
-			//
-		case "khulna", "rajshahi":
-			//
-		default:
-			// i no jani
-		}
 	}
+}
+
+func greetingUsers(conferenceName string, conferenceTickets int, remainingTickets uint) {
+	fmt.Printf("Welcome to our %v booking application\n", conferenceName) // %v to print any variable
+	fmt.Printf("We have total of %v tickets and %v are remaining\n", conferenceTickets, remainingTickets)
+	fmt.Println("Get your tickets here to attend")
+}
+
+func printFirstNames(bookings []string) {
+	firstNames := []string{} // create an empty slice
+	for _, booking := range bookings {
+		var names = strings.Fields(booking) // Fields returns slices elements when whitespace found. names is a slice here
+		firstNames = append(firstNames, names[0])
+	}
+	fmt.Printf("The first names of bookings are: %v\n", firstNames)
 }
