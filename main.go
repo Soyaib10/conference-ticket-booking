@@ -7,11 +7,7 @@ func main() {
 	conferenceName := "GO Conference"
 	const conferenceTickets int = 50
 	var remainingTickets uint = 50
-	// slices
-	//var bookings = []string{"zihad", "hello", "golang"} // vector<string> bookings = {"zihad", "hello", "golang"}
-	// or
-	//bookings := []string{}
-	var bookings []string // vector<string> bookings
+	var bookings []string
 
 	fmt.Printf("Welcome to our %v booking application\n", conferenceName) // %v to print any variable
 	fmt.Printf("We have total of %v tickets and %v are remaining\n", conferenceTickets, remainingTickets)
@@ -33,11 +29,10 @@ func main() {
 	fmt.Scan(&userTickets)
 
 	remainingTickets -= userTickets
-	bookings = append(bookings, firstName+" "+lastName) // bookings.push_back("fkjf")
-	fmt.Printf("The whole slice: %v\n", bookings)
-	fmt.Printf("The first value: %v\n", bookings[0])
-	fmt.Printf("Slice lenth: %v\n", len(bookings))
+	bookings = append(bookings, firstName+" "+lastName)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+
+	fmt.Printf("All the bookings %v", bookings)
 }
