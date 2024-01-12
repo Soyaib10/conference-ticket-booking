@@ -66,5 +66,17 @@ func main() {
 				fmt.Println("number of tickets you entered is invalid")
 			}
 		}
+
+		// switch
+		city := "dhaka"
+
+		switch city {
+		case "chittagong":
+			//
+		case "khulna", "rajshahi":
+			//
+		default:
+			// i no jani
+		}
 	}
 }
