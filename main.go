@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"strconv"
 )
 
-// package level variables: it does not support a := 5 type initialization. They are accessable from any function under the 
-// package they are. so the functions that uses these variables as parameter don't need this in parameter list. 
+// package level variables: it does not support a := 5 type initialization. They are accessable from any function under the
+// package they are. so the functions that uses these variables as parameter don't need this in parameter list.
 const conferenceTickets int = 50
 
 var conferenceName = "GO Conference"
 var remainingTickets uint = 50
-var bookings []string
+var bookings = make([]map[string]string, 0) // empty list of maps
 
 func main() {
 	// greeting user function
@@ -59,8 +59,8 @@ func greetingUsers() {
 func getFirstNames() []string { // function takes input and returns slice
 	firstNames := []string{} // create an empty slice
 	for _, booking := range bookings {
-		var names = strings.Fields(booking) // Fields returns slices elements when whitespace found. names is a slice here
-		firstNames = append(firstNames, names[0])
+		//var names = strings.Fields(booking) // Fields returns slices elements when whitespace found. names is a slice here
+		firstNames = append(firstNames, booking["firstName"])
 	}
 
 	return firstNames
@@ -86,7 +86,17 @@ func getUserInput() (string, string, string, uint) {
 
 func bookTicket(userTickets uint, firstName string, lastName string, email string) {
 	remainingTickets -= userTickets
-	bookings = append(bookings, firstName+" "+lastName)
+
+	// create a map for user
+	// empty map-- var userData map[string][string] 
+	userData := make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10) // convert int to string -20 to "20"
+	bookings = append(bookings, userData)
+
+	fmt.Printf("List of bookings is %v\n", bookings)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
