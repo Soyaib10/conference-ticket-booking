@@ -5,7 +5,8 @@ import (
 	"strings"
 )
 
-// package level variables: it does not support a := 5 type initialization. They are accessable from any function under the package they are. so the functions that uses these variables as parameter don't need this in parameter list. 
+// package level variables: it does not support a := 5 type initialization. They are accessable from any function under the 
+// package they are. so the functions that uses these variables as parameter don't need this in parameter list. 
 const conferenceTickets int = 50
 
 var conferenceName = "GO Conference"
@@ -13,8 +14,6 @@ var remainingTickets uint = 50
 var bookings []string
 
 func main() {
-	// variable declaration
-
 	// greeting user function
 	greetingUsers()
 
@@ -65,14 +64,6 @@ func getFirstNames() []string { // function takes input and returns slice
 	}
 
 	return firstNames
-}
-
-func validateUserInput(firstName string, lastName string, email string, userTickets uint) (bool, bool, bool) {
-	isValidName := len(firstName) >= 2 && len(lastName) >= 2
-	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
-
-	return isValidName, isValidEmail, isValidTicketNumber // return multiple values
 }
 
 func getUserInput() (string, string, string, uint) {
