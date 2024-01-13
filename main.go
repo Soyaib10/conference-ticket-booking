@@ -36,7 +36,7 @@ func main() {
 			bookTicket(userTickets, firstName, lastName, email)
 
 			// send tickets
-			sendTicket(userTickets, firstName, lastName, email)
+			go sendTicket(userTickets, firstName, lastName, email)
 
 			// print first names
 			firstNames := getFirstNames()
