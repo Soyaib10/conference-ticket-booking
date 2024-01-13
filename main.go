@@ -36,7 +36,7 @@ func main() {
 			bookTicket(userTickets, firstName, lastName, email)
 
 			// send tickets
-			go sendTicket(userTickets, firstName, lastName, email)
+			go sendTicket(userTickets, firstName, lastName, email) // creating concurrency 
 
 			// print first names
 			firstNames := getFirstNames()
@@ -112,7 +112,7 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 }
 
 func sendTicket(userTickets uint, firstName string, lastName string, email string) {
-	time.Sleep(50 * time.Second)
+	time.Sleep(5 * time.Second) // waiting to send messages
 	ticket := fmt.Sprintf("%v tickets for %v %v", userTickets, firstName, lastName)
 	fmt.Println("#################")
 	fmt.Printf("Sending ticket:\n %v \nto email address %v\n", ticket, email)
