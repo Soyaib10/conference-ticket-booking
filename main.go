@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 // package level variables: it does not support a := 5 type initialization. They are accessable from any function under the
@@ -11,7 +10,14 @@ const conferenceTickets int = 50
 
 var conferenceName = "GO Conference"
 var remainingTickets uint = 50
-var bookings = make([]map[string]string, 0) // empty list of maps
+var bookings = make([]UserData, 0) // empty slice of struct
+
+type UserData struct {
+	firstName       string
+	lastName        string
+	email           string
+	numberOfTickets uint
+}
 
 func main() {
 	// greeting user function
@@ -59,10 +65,8 @@ func greetingUsers() {
 func getFirstNames() []string { // function takes input and returns slice
 	firstNames := []string{} // create an empty slice
 	for _, booking := range bookings {
-		//var names = strings.Fields(booking) // Fields returns slices elements when whitespace found. names is a slice here
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
-
 	return firstNames
 }
 
@@ -87,15 +91,15 @@ func getUserInput() (string, string, string, uint) {
 func bookTicket(userTickets uint, firstName string, lastName string, email string) {
 	remainingTickets -= userTickets
 
-	// create a map for user
-	// empty map-- var userData map[string][string] 
-	userData := make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["numberOfTickets"] = strconv.FormatUint(uint64(userTickets), 10) // convert int to string -20 to "20"
-	bookings = append(bookings, userData)
+	// create a struct for user
+	var userData = UserData{
+		firstName:       firstName,
+		lastName:        lastName,
+		email:           email,
+		numberOfTickets: userTickets,
+	}
 
+	bookings = append(bookings, userData)
 	fmt.Printf("List of bookings is %v\n", bookings)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
